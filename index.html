@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ordination Invitation</title>
+
+<style>
+:root {
+    --primary: #0A2A66;
+    --secondary: #1E90FF;
+    --light: #f4f8ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Sarabun", sans-serif;
+}
+
+body {
+    background: var(--light);
+    color: #333;
+    scroll-behavior: smooth;
+}
+
+section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+h1, h2 {
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.intro {
+    background: linear-gradient(135deg, #0A2A66, #1E90FF);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.intro::after {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+    top: -150px;
+    right: -150px;
+}
+
+.intro h1 {
+    color: white;
+    font-size: 2.2rem;
+}
+
+.intro h2 {
+    color: white;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background: var(--secondary);
+    transform: scale(1.05);
+}
+
+.card-image {
+    max-width: 90%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    margin-top: 20px;
+}
+
+.schedule-box {
+    background: white;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.footer {
+    background: var(--primary);
+    color: white;
+    padding: 30px 20px;
+}
+
+.countdown {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.countdown-box {
+    background: white;
+    display: inline-block;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0A2A66;
+}
+
+.sub-text {
+    margin-top: 30px;
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+#timer span {
+    font-size: 2rem;
+    margin: 0 5px;
+    color: #1E90FF;
+}
+
+section:nth-child(even) {
+    background: #f0f6ff;
+}
+
+#countdown {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0A2A66;
+}
+
+section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.6s ease;
+}
+
+section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.location {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.map-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #1E90FF;
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.map-btn:hover {
+    background: #0A2A66;
+}
+
+.map-container {
+    margin-top: 30px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.friends {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.friend-box {
+    background: white;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.friend-box button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background: #1E90FF;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<section class="intro">
+    <h1>ขอเรียนเชิญร่วมงานอุปสมบท</h1>
+    <h2>นายวีรภัทร เอี่ยมสนิท (นาคโอ๊ต)</h2>
+    <p>วันที่ 8 – 9 เมษายน พ.ศ. 2569</p>
+    <a href="#schedule" class="button">ดูรายละเอียด</a>
+</section>
+
+<!-- COUNTDOWN -->
+<section class="countdown">
+    <h2>⏳ นับถอยหลังสู่วันอุปสมบท</h2>
+    
+    <div class="countdown-box">
+        <div id="timer">
+            <span id="days">0</span> วัน 
+            <span id="hours">0</span> ชั่วโมง 
+            <span id="minutes">0</span> นาที 
+            <span id="seconds">0</span> วินาที
+        </div>
+    </div>
+    <p class="sub-text">เหลือเวลาอีกไม่มาก ก่อนหัวจะโล้น 😄</p>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+    <h2>กำหนดการอุปสมบท</h2>
+
+    <div class="schedule-box">
+        <h3>วันที่ 8 เมษายน พ.ศ.2569</h3>
+        <p>16:00 น. พิธีปลงผมนาค</p>
+    </div>
+
+    <div class="schedule-box">
+        <h3>วันที่ 9 เมษายน พ.ศ.2569</h3>
+        <p>07:00 น. พิธีสอนนาค</p>
+        <p>09:00 น. พิธีอุปสมบท</p>
+        <p>11:00 น. ถวายภัตตาหารเพล</p>
+    </div>
+
+    <p>จึงขอเรียนเชิญท่านและครอบครัวร่วมเป็นเกียรติในงานครั้งนี้</p>
+</section>
+
+<!-- LOCATION -->
+<section>
+    <h2>สถานที่จัดงาน</h2>
+    <p>ณ พัทธสีมาวัดกกแรต</p>
+    <p>ตำบลกกแรต อำเภอกงไกรลาศ จังหวัดสุโขทัย</p>
+    <a href="https://maps.app.goo.gl/Fv2B21ov33z6a5wi8" 
+       target="_blank" 
+       class="map-btn">
+       เปิดแผนที่นำทาง
+    </a>
+    <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3815.9207213821605!2d100.0400998!3d16.978449500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30dfa9594cb6c649%3A0xe9efb55eac876b86!2z4Lin4Lix4LiU4LiB4LiB4LmB4Lij4LiV!5e0!3m2!1sth!2sth!4v1771856334986!5m2!1sth!2sth" 
+            width="600" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</section>
+
+<!-- OFFICIAL CARD -->
+<section>
+    <h2>การ์ดเชิญอย่างเป็นทางการ</h2>
+    <p>สามารถดาวน์โหลดการ์ดเชิญฉบับเต็มได้ด้านล่าง</p>
+
+    <!-- เปลี่ยนชื่อไฟล์รูปให้ตรงกับของคุณ -->
+    <img src="image/ordination.png" alt="Invitation Card" class="card-image">
+
+    <br>
+    <a href="image/ordination.png" download class="button">
+        ดาวน์โหลดการ์ดเชิญ
+    </a>
+</section>
+
+<!-- FUN SECTION -->
+<section class="friends">
+    <h2>เพื่อน</h2>
+    <div class="friend-box">
+        <p id="friendMessage">กดปุ่มดูคำแซวจากเพื่อน 👇</p>
+        <button onclick="randomMessage()">สุ่มคำแซว</button>
+    </div>
+</section>
+<script>
+const messages = [
+    "ตอนนี้ยังเรียกไอ้โอ๊ตได้ หลังจากนี้เรียกหลวงพี่นะ",
+    "ใครติดเงิน รีบเคลียร์ก่อนมันถือศีล",
+    "บวชครั้งนี้ เพื่อบุญ… และเพื่อตัดผมฟรี",
+    "เข้าวัดครั้งนี้ แม่ปลื้มสุด",
+    "จากเพื่อนกิน สู่เพื่อนทำบุญ",
+    "บวชแล้วอย่าลืมตอบแชทนะหลวงพี่",
+    "สึกมาแล้วอย่าลืมเลี้ยงข้าว",
+    "ผมสั้นลง แต่ศรัทธายาวขึ้น",
+    "บวชครั้งนี้ ขออภัยในทุกการกระทำ",
+    "ใครจะมาลองลูบหัวโล้น รีบเลย",
+    "ครั้งสุดท้ายก่อนเข้าสู่โหมดเงียบ",
+    "โหมดเครื่องบินกำลังจะเปิด",
+    "ใครอยากเห็นเวอร์ชั่น 0 มม. ห้ามพลาด",
+    "ก่อนจะเป็นพระ เคยเป็นภาระมาก่อน",
+    "งานนี้ไม่มีดนตรี มีแต่เสียงสวด",
+    "เปลี่ยนจากน้ำอัดลม เป็นน้ำปานะ",
+    "หัวโล้นแต่ยังยิ้มได้",
+    "ถ้าทักแล้วไม่ตอบ แสดงว่าถือศีล",
+    "เข้าวัดแล้ว อย่าทักมาชวนเที่ยว",
+    "บวชครั้งนี้ เพื่อรีเซ็ตชีวิต",
+    "หลังจากนี้ห้ามเรียกไอ้ ต้องเรียกหลวง",
+    "หัวโล้นไม่ใช่แฟชั่น แต่เป็นศรัทธา",
+    "รีบมาแซววันนี้ เดี๋ยวพรุ่งนี้ไม่ได้แซว",
+    "งานนี้โกนจริง ไม่ใช้ฟิลเตอร์",
+    "หลังจากนี้อาจไม่ได้ออนเกม",
+    "บวชเพื่อบุญ แต่ยังรักเพื่อนเหมือนเดิม",
+    "เข้าวัดครั้งนี้ ไม่ได้หนีใครนะ",
+    "บวชครั้งนี้เพื่อแม่จริง ๆ",
+    "ใครอยากขอขมา เชิญในงาน",
+    "อย่าลืมมาร่วมอนุโมทนาบุญ",
+    "โกนหัวได้ แต่โกนความทรงจำไม่ได้",
+    "จากวันนี้ไป… เรียกผมว่า หลวงพี่โอ๊ต"
+];
+
+function randomMessage() {
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    document.getElementById("friendMessage").innerText = messages[randomIndex];
+}
+</script>
+
+<!-- FOOTER -->
+<section class="footer">
+    <p>ขออนุโมทนาบุญกับทุกท่านที่มาร่วมงานและร่วมอนุโมทนา</p>
+</section>
+
+<script>
+// COUNTDOWN
+    const targetDate = new Date(2026, 3, 8, 16, 0, 0).getTime();
+
+    const timer = setInterval(function () {
+
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById("timer").innerHTML = "🎉 เข้าพิธีอุปสมบทแล้ว 🎉";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+
+    }, 1000);
+
+const sections = document.querySelectorAll("section");
+
+window.addEventListener("scroll", () => {
+    sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+            sec.classList.add("show");
+        }
+    });
+});
+</script>
+
+</body>
+</html>
