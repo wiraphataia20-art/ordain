@@ -139,9 +139,14 @@ section:nth-child(even) {
 }
 
 section {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 0.6s ease;
+}
+
+section.hidden {
     opacity: 0;
     transform: translateY(40px);
-    transition: 0.6s ease;
 }
 
 section.show {
@@ -374,6 +379,12 @@ window.addEventListener("scroll", () => {
         if (top < window.innerHeight - 100) {
             sec.classList.add("show");
         }
+    });
+});
+
+window.addEventListener("load", () => {
+    document.querySelectorAll("section").forEach(sec => {
+        sec.classList.add("show");
     });
 });
 </script>
