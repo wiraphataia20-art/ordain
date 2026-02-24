@@ -40,6 +40,7 @@ h1, h2 {
     color: white;
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 
 .intro::after {
@@ -51,6 +52,7 @@ h1, h2 {
     border-radius: 50%;
     top: -150px;
     right: -150px;
+    pointer-events: none;
 }
 
 .intro h1 {
@@ -213,24 +215,24 @@ section.show {
 <!-- INTRO -->
 <section class="intro">
     <h1>ขอเรียนเชิญร่วมงานอุปสมบท</h1>
-    <h2>นายวีรภัทร เอี่ยมสนิท (นาคโอ๊ต)</h2>
+    <h2>นายวีรภัทร เอี่ยมสนิท (🤔)</h2>
     <p>วันที่ 8 – 9 เมษายน พ.ศ. 2569</p>
     <a href="#schedule" class="button">ดูรายละเอียด</a>
 </section>
 
 <!-- COUNTDOWN -->
 <section class="countdown">
-    <h2>⏳ นับถอยหลังสู่วันอุปสมบท</h2>
+    <h2>นับถอยหลังสู่วันอุปสมบท</h2>
     
     <div class="countdown-box">
         <div id="timer">
-            <span id="days">0</span> วัน 
-            <span id="hours">0</span> ชั่วโมง 
-            <span id="minutes">0</span> นาที 
-            <span id="seconds">0</span> วินาที
+            <span id="days">0</span> Days 
+            <span id="hours">0</span> Hours 
+            <span id="minutes">0</span> Minutes 
+            <span id="seconds">0</span> Seconds
         </div>
     </div>
-    <p class="sub-text">เหลือเวลาอีกไม่มาก ก่อนหัวจะโล้น 😄</p>
+    <p class="sub-text">เหลือเวลาอีกไม่มาก ก่อนหัวจะโล้น </p>
 </section>
 
 <!-- SCHEDULE -->
